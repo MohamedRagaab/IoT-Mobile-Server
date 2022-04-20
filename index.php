@@ -1,23 +1,23 @@
 <?php
 
 /* Control Motor From Mobile */
-if(isset($_GET['motor'])){
+if(isset($_GET['on_off'])){
 
     /* Open File that store Motor status */
-    $motorStatus = fopen('motor.txt','w');
+    $motorStatus = fopen('on_off.txt','w');
     // check the param is not embty
-    if($_GET['motor'] == 1){
+    if($_GET['on_off'] == 1){
 
         fwrite($motorStatus,'1');
         $statuson = 1;
-        $motorJasonObjest = '{"motor":'.$statuson.'}';
+        $motorJasonObjest = '{"on_off":'.$statuson.'}';
         echo($motorJasonObjest);
 
-    }else if ($_GET['motor'] == 0){
+    }else if ($_GET['on_off'] == 0){
 
         fwrite($motorStatus,'0');
         $statusoff = 0;
-        $motorJasonObjest = '{"motor":'.$statusoff.'}';
+        $motorJasonObjest = '{"on_off":'.$statusoff.'}';
         echo($motorJasonObjest);
         
     }
@@ -53,7 +53,7 @@ if(isset($_GET['motor'])){
         $speed = fread($handlespeed,filesize('speed.txt'));
         $speedJasonObjest = '{"speed":'.$speed.'}';
         echo($speedJasonObjest);
-
+        
     }else if ($_GET['client'] == 'esp'){
 
         $speedFile = fopen('speed.txt','w');
@@ -63,7 +63,7 @@ if(isset($_GET['motor'])){
     /* Control Speed From Mobile */
     }else if (($_GET['client'] == 'flutter') && ($_GET['mode'] == 'control')){
 
-        $speedFile = fopen('speed.txt','w');
+        $speedFile = fopen('set_point.txt','w');
         fwrite($speedFile,$_GET['getSpeed']);
         echo("Speed is set");
 
