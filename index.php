@@ -47,16 +47,16 @@ if(isset($_GET['on_off'])){
     /* Monitoring Speed */
 }else if (isset($_GET['getSpeed'])){
     if (($_GET['getSpeed'] == 5000) && ($_GET['client'] == 'flutter')){
-        /* Open File that store Temperature status */
-        $handlespeed = fopen('speed.txt','r');
+        /* Open File  */
+        $handlespeed = fopen('actual_speed.txt','r');
         // '{"speed":100}'
-        $speed = fread($handlespeed,filesize('speed.txt'));
+        $speed = fread($handlespeed,filesize('actual_speed.txt'));
         $speedJasonObjest = '{"speed":'.$speed.'}';
         echo($speedJasonObjest);
         
     }else if ($_GET['client'] == 'esp'){
 
-        $speedFile = fopen('speed.txt','w');
+        $speedFile = fopen('actual_speed.txt','w');
         fwrite($speedFile,$_GET['getSpeed']);
         echo("Speed is set");
 
